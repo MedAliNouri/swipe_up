@@ -1,0 +1,55 @@
+
+
+
+<div class="align imageBg">
+
+
+    <div class="grid align__item">
+  
+      <div class="register">
+  
+   <img width="140" height="100" src="assets/logo.png" alt="">
+  
+        <h2>Swipe Up</h2>
+  
+        <form  [formGroup]="contactForm"  class="form">
+  
+          <div class="form__field">
+            <input type="email" formControlName="email" placeholder="exemple@exemple.com">
+          
+               <span class="error" *ngIf="isControlHasError('email','required')"> email is required</span>
+               <span class="error" *ngIf="isControlHasError('email','email')"> email invalid</span>
+          </div>
+         
+          <div class="form__field">
+            
+            <input formControlName="password" type="password" placeholder="••••••••••••">
+            <span class="error" *ngIf="isControlHasError('password','required')">password required</span>
+          </div>
+  
+          <div class="form__field">
+            <p-progressSpinner [style]="{width: '50px', height: '50px'}" *ngIf="loading"></p-progressSpinner>
+            <button type="submit" *ngIf="!loading" (click)="submit();loading=true" class="animated-button1">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              login
+            </button>
+          
+          </div> 
+  
+        </form>
+  
+        <p>forget password? <a class="reset_pass" (click)="resetPassword()">reset</a></p>
+  <!-- HTML !-->
+<!-- HTML !-->
+
+
+
+
+      </div>
+  
+    </div>
+  
+  </div>
