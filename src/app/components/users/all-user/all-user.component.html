@@ -1,73 +1,135 @@
-
-
 <p-card header="User Table" [style]="{width: '100%'}" styleClass="p-card-shadow">
     <ng-template pTemplate="header">
-       
+
 
     </ng-template>
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedUser || !selectedUser.length"></button>
+            <button pButton pRipple type="button" label="New" icon="fa fa-plus" (click)="openNew()"
+                class="p-button-sm p-button-raised "></button>
+            <button [style]="{'margin-left': '5px'}" pButton pRipple type="button" icon="fa fa-trash"
+                (click)="deleteSelectedProducts()" [disabled]="!selectedUser || !selectedUser.length"
+                class="p-button-sm p-button-raised p-button-danger ml-4"></button>
+
         </ng-template>
 
         <ng-template pTemplate="right">
-         
-            <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+            <div class="flex align-items-center justify-content-between">
+
+                <span class="p-input-icon-left">
+                    <i class="fa fa-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target['value'], 'contains')"
+                        placeholder="Search..." />
+                </span>
+            </div>
+
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll"
+    <p-table #dt [value]="users" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="stack"
         [(selection)]="selectedUser" [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
-            <div class="flex align-items-center justify-content-between">
-                <h5 class="m-0">Manage Products</h5>
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target['value'], 'contains')" placeholder="Search..." />
-                </span>
-            </div>
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 3rem">
                     <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                 </th>
-                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th>Image</th>
-                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-             
-                <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                <th>urlPhoto</th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="lastName">LastName <p-sortIcon field="lastName"></p-sortIcon>
+                </th>
+                <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon>
+                </th>
+                <th pSortableColumn="role">Role <p-sortIcon field="role"></p-sortIcon>
+                </th>
                 <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-user>
             <tr>
                 <td>
-                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                    <p-tableCheckbox [value]="user"></p-tableCheckbox>
                 </td>
-                <td>{{product.name}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
-                <td>dq{{product.price | currency:'USD'}}</td>
-                <td>{{product.category}}</td>
-              
-                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
+
+                <td><img [src]="apiUrl + user.urlPhoto" [alt]="user.name" width="100" class="shadow-4" /></td>
+                <td>{{user.name}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.role}}</td>
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editUser(product)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUser(product)"></button>
+                    <button pButton pRipple icon="fa fa-pencil"
+                        class="p-button-sm  p-button-warning mr-2" (click)="editUser(user)"></button>
+                    <button pButton pRipple icon="fa fa-trash" class="p-button-sm p-button-danger"
+                        (click)="deleteUser(user)"></button>
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="flex align-items-center justify-content-between">
-                In total there are {{products ? products.length : 0 }} products.
+                In total there are {{users ? users.length : 0 }} users.
             </div>
         </ng-template>
     </p-table>
 
     <ng-template pTemplate="footer">
-       
+
     </ng-template>
 </p-card>
+<p-dialog [(visible)]="dialog_show" [style]="{width: '450px'}" header="User Details" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+    
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input (change)="selectFile(user,$event)" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div *ngIf="imageSrc" class="avatar-preview">
+                        <div id="imagePreview" style="background-image: url({{imageSrc}});">
+                           
+                        </div>
+                    </div>
+                    <div *ngIf="!imageSrc" class="avatar-preview">
+                        <p-progressSpinner *ngIf="loadingImg" [style]="{width: '20px', height: '50px',margin:'auto',position:'absolute'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+                        <div id="imagePreview" style="background-image: url(assets/user-profile-placeholder.png);">
+                        </div>
+                    </div>
+                </div>
+       
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
+
+            <p-message *ngIf="submitted && !user.name" severity="error" text="Field is required"></p-message>
+        </div>
+        <div class="field">
+            <label for="name">Last name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="user.lastName" required autofocus />
+
+            <p-message *ngIf="submitted && !user.lastName" severity="error" text="Field is required"></p-message>
+        </div>
+        <div class="field">
+            <label for="name">Email</label>
+            <input type="text" pInputText id="name" [(ngModel)]="user.email" required autofocus />
+
+            <p-message *ngIf="submitted && !user.email" severity="error" text="Field is required"></p-message>
+        </div>
+        <div class="field">
+            <label for="name">Password</label>
+            <input type="text" pInputText id="name" [(ngModel)]="user.password" required autofocus />
+
+            <p-message *ngIf="submitted && !user.password" severity="error" text="Field is required"></p-message>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>

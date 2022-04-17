@@ -6,7 +6,9 @@ import { DashboardComponent } from './dashboard.component';
 import { CountingStatComponent } from './counting-stat/counting-stat.component';
 import {KnobModule} from 'primeng/knob';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {CardModule} from 'primeng/card';
+import {ToolbarModule} from 'primeng/toolbar';
+import {SkeletonModule} from 'primeng/skeleton';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -17,7 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    KnobModule
+    KnobModule,
+    CardModule,
+    ToolbarModule,
+    SkeletonModule
   ]
 })
 export class DashboardModule { }

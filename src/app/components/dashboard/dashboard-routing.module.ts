@@ -5,9 +5,8 @@ import { DashboardComponent } from './dashboard.component';
 
 
 
-const routes: Routes = [{path:'',children:[
-  {path:'',component:CountingStatComponent}
-]}];
+const routes: Routes = [{path:'',component:DashboardComponent}
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

@@ -11,13 +11,15 @@ import {SidebarModule} from 'primeng/sidebar';
 import {AvatarModule} from 'primeng/avatar';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { NgxLetterImageAvatarModule } from 'ngx-letter-image-avatar';
+
 @NgModule({
   declarations: [
    
     ContentLayoutComponent,
     HeaderComponent,
     FooterComponent,
-    SideBarComponent
+    SideBarComponent,
+
   ],
   imports: [
     CommonModule,

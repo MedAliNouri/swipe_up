@@ -4,11 +4,16 @@
 
 export const environment = {
   production: false,
+  apiUrl:"http://192.168.1.13:3000/",
   apiUriAuth:"http://192.168.1.13:3000/auth/login",
   apiUriResetPass:"http://192.168.1.13:3000/auth/restPassword",
   apiUrlUser:"http://192.168.1.13:3000/user",
+  apiUrlUserAvatar:"http://192.168.1.13:3000/user/userUploadAvatar",
+  apiUrlNewUserAvatar:"http://192.168.1.13:3000/user/upload_avatar_for_new_user",
   apiUrlChangePass:"http://192.168.1.13:3000/auth/change_password",
   apiUrlGetToken:"http://192.168.1.13:3000/auth/get_token_password",
+  apiUrlRegister:"http://192.168.1.13:3000/user/register",
+
 };
 
 /*
