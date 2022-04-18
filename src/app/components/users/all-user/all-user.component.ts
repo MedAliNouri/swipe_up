@@ -18,86 +18,77 @@ import { environment } from 'src/environments/environment';
     `],
 })
 export class AllUserComponent implements OnInit {
-  cols:any
-  users:any
-  selectedUser:User[]
-  user:User
-  loading=true
-  submitted=false
-  apiUrl=environment.apiUrl
-  dialog_show=false
-  uploadedFiles=[]
-  imageSrc:any
-  loadingImg=false
-  imagetosave:any
-  constructor(private userService:UserService) { 
+  cols: any
+  users: any
+  selectedUser: User[]
+  user: User
+  loading = true
+  submitted = false
+  apiUrl = environment.apiUrl
+  dialog_show = false
+  uploadedFiles = []
+  imageSrc: any
+  loadingImg = false
+  imagetosave: any
+  constructor(private userService: UserService) {
     this.getAll()
   }
-getAll(){
-  
-  this.userService.getAll().subscribe(res=>{
-    console.log(res)
-    this.loading=false
-    res.forEach(element => {
-   if(!element.urlPhoto){
-    element.urlPhoto=="/images/default.jpg"
-   } 
-  });
-    this.cols  =res
- 
-    this.users=res
-})
-}
+  getAll() {
+
+    this.userService.getAll().subscribe(res => {
+      console.log(res)
+      this.loading = false
+      res.forEach(element => {
+        if (!element.urlPhoto) {
+          element.urlPhoto == "/images/default.jpg"
+        }
+      });
+      this.cols = res
+
+      this.users = res
+    })
+  }
   ngOnInit(): void {
   }
-  openNew(){
-this.user=new User()
-this.dialog_show=true
+  openNew() {
+    this.user = new User()
+    this.dialog_show = true
   }
-  deleteSelectedProducts(){
+  deleteSelectedProducts() {
 
   }
-  deleteUser(user){
+  deleteUser(user) {
 
   }
-  editUser(user){
-    this.user=user
-    this.dialog_show=true
+  editUser(user) {
+    this.user = user
+    this.dialog_show = true
   }
-  hideDialog(){
-    this.dialog_show=false
+  hideDialog() {
+    this.dialog_show = false
   }
-  saveProduct(){
-if(this.user._id==undefined){
-
- 
-   
-    
-      this.userService.saveAndUploadSingle(this.user,this.imagetosave).subscribe(res=>{
-    
-        new SuccessAlert('User saved')
+  saveProduct() {
+    if (this.user._id == undefined) {
+      this.userService.saveAndUploadSingle(this.user, this.imagetosave).subscribe((res:any) => {
+        new SuccessAlert(res.message)
         this.getAll()
       })
-   
-   
-    
-
-}
+    }
   }
-  selectFile(user,event){
-    this.imageSrc=null
-    this.loadingImg=true
+  selectFile(user, event) {
+    this.imageSrc = null
+    this.loadingImg = true
     const reader = new FileReader();
-    this.imagetosave=event.target.files[0]
+    this.imagetosave = event.target.files[0]
     reader.onload = e => this.imageSrc = reader.result;
 
     reader.readAsDataURL(event.target.files[0])
-   if(this.imageSrc || this.imageSrc!=null){
-    this.loadingImg=false
-  }
-   
-    
-    
+    if (this.imageSrc || this.imageSrc != null) {
+      this.loadingImg = false
+    }
+
+
+
 
   }
 }
