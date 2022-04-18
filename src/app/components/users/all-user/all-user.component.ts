@@ -69,22 +69,19 @@ this.dialog_show=true
   }
   saveProduct(){
 if(this.user._id==undefined){
-  this.userService.saveUser(this.user).subscribe((res:any)=>{
+
  
-    if(res.status==false){
-      new ErrorAlert(res.message)
-      return
-    }
-    if(this.imagetosave){
-      this.userService.uploadSingle(res._id,this.imagetosave).subscribe(res=>{
+   
+    
+      this.userService.saveAndUploadSingle(this.user,this.imagetosave).subscribe(res=>{
     
         new SuccessAlert('User saved')
         this.getAll()
       })
-    }
+   
    
     
-  })
+
 }
   }
   selectFile(user,event){

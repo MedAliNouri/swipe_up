@@ -26,7 +26,7 @@
         </ng-template>
     </p-toolbar>
 
-    <p-table #dt [value]="users" [rows]="10" [paginator]="true"
+    <p-table #dt [value]="users" [rows]="5" [paginator]="true"
         [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="stack"
         [(selection)]="selectedUser" [rowHover]="true" dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
@@ -56,7 +56,7 @@
                     <p-tableCheckbox [value]="user"></p-tableCheckbox>
                 </td>
 
-                <td><img [src]="apiUrl + user.urlPhoto" [alt]="user.name" width="100" class="shadow-4" /></td>
+                <td><img [src]="user.urlPhoto" [alt]="user.name" width="100" class="shadow-4" /></td>
                 <td>{{user.name}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.email}}</td>

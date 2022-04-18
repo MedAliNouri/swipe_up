@@ -10,8 +10,8 @@
      
         <div  class="dropdown">
             <a (click)="op.toggle($event)"  >
-              <img *ngIf="!name" class="app-avatar" [src]="user.urlPhoto" alt="avatar">
-              <img *ngIf="name" class="app-avatar" [ngxLetterImageAvatar]="{ name:name }" alt="avatar"></a>
+              <img *ngIf="user.urlPhoto" class="app-avatar" [src]="user.urlPhoto" alt="avatar">
+              <img *ngIf="!user.urlPhoto" class="app-avatar" [ngxLetterImageAvatar]="{ name:name }" alt="avatar"></a>
                 
 
            
