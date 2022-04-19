@@ -9,4 +9,5 @@ export const environment = {
   apiUrlChangePass:"https://hirukuuu.herokuapp.com/auth/change_password",
   apiUrlGetToken:"https://hirukuuu.herokuapp.com/auth/get_token_password",
   apiUrlRegister:"https://hirukuuu.herokuapp.com/user/register",
+  apiUrlUpadate:"https://hirukuuu.herokuapp.com/user/updateOne",
 };
