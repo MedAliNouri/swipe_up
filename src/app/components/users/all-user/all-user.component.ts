@@ -33,21 +33,7 @@ export class AllUserComponent implements OnInit {
   constructor(private userService: UserService) {
     this.getAll()
   }
-  getAll() {
 
-    this.userService.getAll().subscribe(res => {
-      console.log(res)
-      this.loading = false
-      res.forEach(element => {
-        if (!element.urlPhoto) {
-          element.urlPhoto == "/images/default.jpg"
-        }
-      });
-      this.cols = res
-
-      this.users = res
-    })
-  }
   ngOnInit(): void {
   }
   openNew() {
@@ -67,9 +53,14 @@ export class AllUserComponent implements OnInit {
   hideDialog() {
     this.dialog_show = false
   }
-  saveProduct() {
+  saveUser() {
     if (this.user._id == undefined) {
       this.userService.saveAndUploadSingle(this.user, this.imagetosave).subscribe((res:any) => {
+        console.log(res)
+        if(res.status==false){
+          new ErrorAlert(res.message)
+          return
+        }
         new SuccessAlert(res.message)
         this.getAll()
       })
@@ -81,7 +72,7 @@ export class AllUserComponent implements OnInit {
     const reader = new FileReader();
     this.imagetosave = event.target.files[0]
     reader.onload = e => this.imageSrc = reader.result;
-
+console.log(event.target.files[0])
     reader.readAsDataURL(event.target.files[0])
     if (this.imageSrc || this.imageSrc != null) {
       this.loadingImg = false
@@ -90,5 +81,20 @@ export class AllUserComponent implements OnInit {
 
 
 
+  }
+  getAll() {
+    this.userService.getAll().subscribe(res => {
+      console.log(res)
+      this.loading = false
+      res.forEach(element => {
+        if (!element.urlPhoto) {
+          element.urlPhoto == "/images/default.jpg"
+        }
+      });
+      this.cols = res
+
+      this.users = res
+    })
+ 
   }
 }

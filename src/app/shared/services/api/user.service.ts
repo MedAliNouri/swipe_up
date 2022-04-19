@@ -16,22 +16,23 @@ private readonly URL_REGISTER=environment.apiUrlRegister
    return this.http.get<User[]>(this.URL)
   }
 
-  saveAndUploadSingle(user,file: File): Observable<HttpEvent<any>> {
+  saveAndUploadSingle(user,file: File){
     const formData: FormData = new FormData();
 console.log(user)
 
     formData.append('file', file);
     formData.append('user', JSON.stringify(user));
     console.log(formData)
-    const req = new HttpRequest('POST', this.URL_UPLOAD, formData, {
+    return this.http.post(this.URL_UPLOAD, formData)
+    // const req = new HttpRequest('POST', this.URL_UPLOAD, formData, {
         
-      //reportProgress: false,
-      //responseType: 'json'
-    });
+    //   //reportProgress: false,
+    //   //responseType: 'json'
+    // });
 
-    return this.http.request(req);
+    // return this.http.request(req);
   }
   saveUser(user:any){
-    return this.http.post(this.URL_REGISTER,user)
+ 
     }
 }

@@ -90,14 +90,21 @@
                         <input (change)="selectFile(user,$event)" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                         <label for="imageUpload"></label>
                     </div>
-                    <div *ngIf="imageSrc" class="avatar-preview">
-                        <div id="imagePreview" style="background-image: url({{imageSrc}});">
-                           
+                    <div *ngIf="!user.urlPhoto">
+                        <div *ngIf="imageSrc" class="avatar-preview">
+                            <div id="imagePreview" style="background-image: url({{imageSrc}});">
+                               
+                            </div>
+                        </div>
+                        <div *ngIf="!imageSrc" class="avatar-preview">
+                            <p-progressSpinner *ngIf="loadingImg" [style]="{width: '20px', height: '50px',margin:'auto',position:'absolute'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+                            <div id="imagePreview" style="background-image: url(assets/user-profile-placeholder.png);">
+                            </div>
                         </div>
                     </div>
-                    <div *ngIf="!imageSrc" class="avatar-preview">
+                    <div *ngIf="user.urlPhoto" class="avatar-preview">
                         <p-progressSpinner *ngIf="loadingImg" [style]="{width: '20px', height: '50px',margin:'auto',position:'absolute'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
-                        <div id="imagePreview" style="background-image: url(assets/user-profile-placeholder.png);">
+                        <div id="imagePreview" style="background-image: url({{user.urlPhoto}});">
                         </div>
                     </div>
                 </div>
@@ -130,6 +137,6 @@
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
     </ng-template>
 </p-dialog>
