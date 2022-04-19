@@ -30,58 +30,90 @@ export class AllUserComponent implements OnInit {
   imageSrc: any
   loadingImg = false
   imagetosave: any
+
+
+
   constructor(private userService: UserService) {
     this.getAll()
   }
 
+
+/*************************************************************************** */
+
   ngOnInit(): void {
   }
+
+/*************************************************************************** */
+
   openNew() {
     this.user = new User()
     this.dialog_show = true
   }
+
+
+
   deleteSelectedProducts() {
 
   }
+
+
+/*************************************************************************** */
   deleteUser(user) {
 
   }
+
+/*************************************************************************** */
+
   editUser(user) {
     this.user = user
     this.dialog_show = true
   }
+
+/*************************************************************************** */
+
   hideDialog() {
     this.dialog_show = false
   }
+
+
+/*************************************************************************** */
   saveUser() {
     if (this.user._id == undefined) {
-      this.userService.saveAndUploadSingle(this.user, this.imagetosave).subscribe((res:any) => {
+      this.userService.saveAndUploadSingle(this.user, this.imagetosave).subscribe((res: any) => {
         console.log(res)
-        if(res.status==false){
+        if (res.status == false) {
           new ErrorAlert(res.message)
           return
         }
         new SuccessAlert(res.message)
         this.getAll()
       })
+    }else{
+      if(this.imageSrc){
+        console.log(this.user)
+      }
     }
   }
+
+
+
+/*************************************************************************** */
   selectFile(user, event) {
     this.imageSrc = null
     this.loadingImg = true
     const reader = new FileReader();
     this.imagetosave = event.target.files[0]
     reader.onload = e => this.imageSrc = reader.result;
-console.log(event.target.files[0])
+    console.log(event.target.files[0])
     reader.readAsDataURL(event.target.files[0])
     if (this.imageSrc || this.imageSrc != null) {
       this.loadingImg = false
     }
-
-
-
-
+ 
   }
+/*************************************************************************** */
+
+
   getAll() {
     this.userService.getAll().subscribe(res => {
       console.log(res)
@@ -95,6 +127,6 @@ console.log(event.target.files[0])
 
       this.users = res
     })
- 
+
   }
 }

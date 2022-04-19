@@ -1,7 +1,13 @@
 a{
     color: white;
+    font-weight: 500;
 }
 .active{
     background-color: white;
-    color: black;
+    color: #ff1935;
+    font-weight: 500;
+}
+a:hover{
+    color: #ff1935;
+    font-weight: 500;
 }
