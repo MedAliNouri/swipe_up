@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ErrorAlert } from 'src/app/shared/layout/features/alert/error.alert';
 import { SuccessAlert } from 'src/app/shared/layout/features/alert/success.alert';
 import { User } from 'src/app/shared/model/user';
@@ -30,8 +31,8 @@ export class AllUserComponent implements OnInit {
   imageSrc: any
   loadingImg = false
   imagetosave: any
-
-
+  loading_save_result=false
+@ViewChild('f') form:NgForm
 
   constructor(private userService: UserService) {
     this.getAll()
@@ -78,19 +79,32 @@ export class AllUserComponent implements OnInit {
 
 /*************************************************************************** */
   saveUser() {
-    if (this.user._id == undefined) {
+    this.submitted=true
+    this.loading_save_result=true
+    if (this.user._id == undefined || !this.user._id ) {
       this.userService.saveAndUploadSingle(this.user, this.imagetosave).subscribe((res: any) => {
         console.log(res)
         if (res.status == false) {
           new ErrorAlert(res.message)
+          this.loading_save_result=false
           return
         }
         new SuccessAlert(res.message)
         this.getAll()
+        this.loading_save_result=false
+        this.dialog_show = false
       })
     }else{
-      if(this.imageSrc){
+      if(!this.imageSrc && this.form.valid){
         console.log(this.user)
+        delete this.user.password
+        delete this.user._id
+        console.log(this.form.valid)
+        this.userService.updateOne(this.user).subscribe(res=>{
+          this.loading_save_result=false
+          console.log(res)
+          this.dialog_show = false
+        })
       }
     }
   }

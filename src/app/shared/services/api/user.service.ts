@@ -10,7 +10,7 @@ import { User } from '../../model/user';
 export class UserService {
 private readonly URL=environment.apiUrlUser
 private readonly URL_UPLOAD=environment.apiUrlUserAvatar
-private readonly URL_REGISTER=environment.apiUrlRegister
+private readonly URL_UPDATE=environment.apiUrlUpadate
   constructor(private http:HttpClient) { }
   getAll(){
    return this.http.get<User[]>(this.URL)
@@ -32,6 +32,11 @@ console.log(user)
 
     // return this.http.request(req);
   }
+  updateOne(user:User){
+ return this.http.post(this.URL_UPDATE,user)
+  }
+
+
   saveUser(user:any){
  
     }

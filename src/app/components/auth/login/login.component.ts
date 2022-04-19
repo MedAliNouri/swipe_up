@@ -73,7 +73,7 @@ Swal.fire({
 			showCancelButton: true,
 			confirmButtonText: "Restore",
       color: 'white',
-      background: '#3879cad4',
+      background: '#d50b1e',
       confirmButtonColor: "#031f32",
   showLoaderOnConfirm: true,
   preConfirm: (email) => {

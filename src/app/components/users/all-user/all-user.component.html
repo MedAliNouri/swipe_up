@@ -84,7 +84,7 @@
     styleClass="p-fluid">
     <ng-template pTemplate="content">
 
-    
+    <form #f="ngForm">
                 <div class="avatar-upload">
                     <div class="avatar-edit">
                         <input (change)="selectFile(user,$event)" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
@@ -108,35 +108,52 @@
                         </div>
                     </div>
                 </div>
-       
+              
         <div class="field">
             <label for="name">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user.name" required autofocus />
+            <input type="text" pInputText id="name" name="name" [(ngModel)]="user.name" required autofocus />
 
             <p-message *ngIf="submitted && !user.name" severity="error" text="Field is required"></p-message>
         </div>
         <div class="field">
             <label for="name">Last name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user.lastName" required autofocus />
+            <input type="text" name="lastName" pInputText id="name" [(ngModel)]="user.lastName" required autofocus />
 
             <p-message *ngIf="submitted && !user.lastName" severity="error" text="Field is required"></p-message>
         </div>
         <div class="field">
             <label for="name">Email</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user.email" required autofocus />
+            <input type="text" name="email" pInputText id="name" [(ngModel)]="user.email" required autofocus />
 
             <p-message *ngIf="submitted && !user.email" severity="error" text="Field is required"></p-message>
         </div>
         <div class="field">
             <label for="name">Password</label>
-            <input type="text" pInputText id="name" [(ngModel)]="user.password" required autofocus />
+            <input type="text" name="Password" pInputText id="name" [(ngModel)]="user.password" required autofocus />
 
             <p-message *ngIf="submitted && !user.password" severity="error" text="Field is required"></p-message>
         </div>
+        <div *ngIf="loading_save_result" class="loader-wrapper">
+            <div class="loader">
+            <div class="roller"></div>
+            <div class="roller"></div>
+          </div>
+          
+          <div id="loader2" class="loader">
+            <div class="roller"></div>
+            <div class="roller"></div>
+          </div>
+          
+          <div id="loader3" class="loader">
+            <div class="roller"></div>
+            <div class="roller"></div>
+          </div>
+        </div>
+    </form>
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
+        <button  pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button [disabled]="loading_save_result" pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUser()"></button>
     </ng-template>
 </p-dialog>

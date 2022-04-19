@@ -13,6 +13,7 @@ export const environment = {
   apiUrlChangePass:"http://192.168.1.13:3000/auth/change_password",
   apiUrlGetToken:"http://192.168.1.13:3000/auth/get_token_password",
   apiUrlRegister:"http://192.168.1.13:3000/user/register",
+  apiUrlUpadate:"http://192.168.1.13:3000/user/updateOne",
 
 };
 

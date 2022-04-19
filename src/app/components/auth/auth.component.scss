@@ -285,8 +285,8 @@ a {
     width: 100%;
     height: 2px;
     border-radius: 10px;
-    background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 8, 0)), to(#7426d9));
-    background: linear-gradient(to left, rgba(43, 8, 8, 0), #7426d9);
+    background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 8, 0)), to(#ff1935));
+    background: linear-gradient(to left, rgba(43, 8, 8, 0), #ff1935);
     -webkit-animation: 2s animateTop linear infinite;
             animation: 2s animateTop linear infinite;
   }
@@ -308,8 +308,8 @@ a {
     height: 100%;
     width: 2px;
     border-radius: 10px;
-    background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 8, 8, 0)), to(#7426d9));
-    background: linear-gradient(to top, rgba(43, 8, 8, 0), #7426d9);
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 8, 8, 0)), to(#ff1935));
+    background: linear-gradient(to top, rgba(43, 8, 8, 0), #ff1935);
     -webkit-animation: 2s animateRight linear -1s infinite;
             animation: 2s animateRight linear -1s infinite;
   }
@@ -331,8 +331,8 @@ a {
     width: 100%;
     border-radius: 10px;
     height: 2px;
-    background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 8, 0)), to(#7426d9));
-    background: linear-gradient(to right, rgba(43, 8, 8, 0), #7426d9);
+    background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 8, 0)), to(#ff1935));
+    background: linear-gradient(to right, rgba(43, 8, 8, 0), #ff1935);
     -webkit-animation: 2s animateBottom linear infinite;
             animation: 2s animateBottom linear infinite;
   }
@@ -354,8 +354,8 @@ a {
     height: 100%;
     width: 2px;
     border-radius: 10px;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 8, 8, 0)), to(#7426d9));
-    background: linear-gradient(to bottom, rgba(43, 8, 8, 0), #7426d9);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 8, 8, 0)), to(#ff1935));
+    background: linear-gradient(to bottom, rgba(43, 8, 8, 0), #ff1935);
     -webkit-animation: 2s animateLeft linear -1s infinite;
             animation: 2s animateLeft linear -1s infinite;
   }
